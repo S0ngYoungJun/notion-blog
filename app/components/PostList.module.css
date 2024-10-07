@@ -1,0 +1,38 @@
+.postItem {
+  padding: 20px;
+  width:20vw;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.postTitle {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.postContent {
+  font-size: 16px;
+  color: #333;
+}
+
+.postDate {
+  font-size: 14px;
+  color: #666;
+  margin-top: 10px;
+}
+
+.tagList {
+  margin-top: 10px;
+}
+
+.tagItem {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #0070f3;
+  color: white;
+  border-radius: 4px;
+  margin-right: 5px;
+}
