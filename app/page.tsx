@@ -8,14 +8,13 @@ export default async function Home() {
 
   return (
     <div className={styles.root}>
-      <div className={styles.topbar}>
+      <div className={styles.top}>
       <TopBar />
       </div>
-      <div>
+      <div className={styles.main}>
         <div className={styles.container}>
           {/* 왼쪽 영역: 포스트 목록 */}
           <div className={styles.left}>
-            <h1>Posts</h1>
             <PostList posts={posts} />
           </div>
 

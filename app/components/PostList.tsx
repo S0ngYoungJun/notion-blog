@@ -1,6 +1,7 @@
 import React from 'react';
 import { NotionPost } from '../types/notionTypes';
 import styles from './PostList.module.css'
+
 interface PostListProps {
   posts: NotionPost[];
 }
@@ -11,9 +12,9 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
   }
 
   return (
-    <ul>
+    <div className={styles.postList}>
       {posts.map((post) => (
-        <li key={post.id} className={styles.postItem}>
+        <div key={post.id} className={styles.postItem}>
           <h2 className={styles.postTitle}>{post.title || 'No title'}</h2>
           <p className={styles.postContent}>{post.post || 'No content'}</p>
           <span className={styles.postDate}>
@@ -23,16 +24,16 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
           {post.tags.length > 0 && (
             <div className={styles.tagList}>
               <strong>Tags:</strong>
-              <ul>
+              <div className={styles.tagContainer}>
                 {post.tags.map((tag) => (
-                  <li key={tag.id} className={styles.tagItem}>{tag.name}</li>
+                  <div key={tag.id} className={styles.tagItem}>{tag.name}</div>
                 ))}
-              </ul>
+              </div>
             </div>
           )}
-        </li>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 };
 

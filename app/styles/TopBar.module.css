@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   width: 100%; /* 전체 너비를 차지 */
-  height: 60px; /* TopBar의 높이 */
+  height: 5vh; /* TopBar의 높이 */
   background-color: #0070f3; /* 배경색 */
   color: white; /* 글자색 */
   display: flex;
