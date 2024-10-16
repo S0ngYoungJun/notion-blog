@@ -7,7 +7,7 @@ export async function getPosts(): Promise<NotionPost[]> {
   const response = await notion.databases.query({
     database_id: process.env.NOTION_DATABASE_ID!,
   });
-  console.log(response.results)
+  
   return response.results.map((page: any) => ({
     id: page.id,
     title: page.properties?.title?.title?.[0]?.plain_text || 'No title',
@@ -24,61 +24,25 @@ export async function getPostDetails(postId: string) {
   const response = await notion.blocks.children.list({
     block_id: postId,
   });
+  console.log(response); // 응답을 확인
 
   return response.results.map((block: any) => {
-    // 여기서는 paragraph 블록만 처리합니다.
-    if (block.type === 'paragraph') {
-      return block.paragraph.rich_text[0]?.plain_text || '';
+    switch (block.type) {
+      case 'paragraph':
+        return block.paragraph.rich_text[0]?.plain_text || '';
+      case 'heading_1':
+        return `# ${block.heading_1.rich_text[0]?.plain_text || ''}`;
+      case 'heading_2':
+        return `## ${block.heading_2.rich_text[0]?.plain_text || ''}`;
+      case 'heading_3':
+        return `### ${block.heading_3.rich_text[0]?.plain_text || ''}`;
+      case 'bulleted_list_item':
+        return `• ${block.bulleted_list_item.rich_text[0]?.plain_text || ''}`;
+      case 'numbered_list_item':
+        return `1. ${block.numbered_list_item.rich_text[0]?.plain_text || ''}`;
+      // 필요에 따라 더 많은 블록 타입 처리 추가
+      default:
+        return '';
     }
-    // 다른 블록 타입을 추가로 처리할 수 있습니다.
-    return '';
   });
 }
-
-// import axios from "axios";
-
-// // Notion API에서 반환되는 데이터를 정의 (간략한 예시)
-// interface NotionPost {
-//   id: string;
-//   properties: {
-//     Name: {
-//       title: Array<{ plain_text: string }>;
-//     };
-//   };
-// }
-
-// // Notion API 응답 타입 정의
-// interface NotionApiResponse {
-//   results: NotionPost[];
-// }
-
-// export default class NotionApi {
-//   static async getItem(): Promise<NotionApiResponse> {
-//     const notionKey: string | undefined = process.env.REACT_APP_NOTION_KEY;
-//     const notionDatabaseKey: string | undefined = process.env.REACT_APP_NOTION_DATABASE_KEY;
-
-//     // 환경 변수 유효성 체크
-//     if (!notionKey || !notionDatabaseKey) {
-//       throw new Error("Notion API Key or Database ID is missing");
-//     }
-
-//     try {
-//       const result = await axios.post<NotionApiResponse>(
-//         `https://api.notion.com/v1/databases/${notionDatabaseKey}/query`,
-//         {
-//           page_size: 100,
-//         },
-//         {
-//           headers: {
-//             Authorization: `Bearer ${notionKey}`,
-//             "Notion-Version": "2021-08-16",
-//           },
-//         }
-//       );
-//       return result.data; // 타입에 맞게 result.data만 반환
-//     } catch (error: any) {
-//       console.error("Error fetching data from Notion:", error.response?.data || error.message);
-//       throw new Error("Failed to fetch data from Notion");
-//     }
-//   }
-// }

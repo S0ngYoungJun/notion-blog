@@ -1,7 +1,7 @@
 import React from 'react';
 import { NotionPost } from '../types/notionTypes';
 import styles from './PostList.module.css'
-
+import Link from 'next/link';
 interface PostListProps {
   posts: NotionPost[];
 }
@@ -14,6 +14,7 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
   return (
     <div className={styles.postList}>
       {posts.map((post) => (
+        <Link href={`/${post.id}`} key={post.id}>
         <div key={post.id} className={styles.postItem}>
           <h2 className={styles.postTitle}>{post.title || 'No title'}</h2>
           <p className={styles.postContent}>{post.post || 'No content'}</p>
@@ -32,6 +33,7 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
             </div>
           )}
         </div>
+        </Link>
       ))}
     </div>
   );
