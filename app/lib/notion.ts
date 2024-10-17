@@ -21,12 +21,30 @@ export async function getPosts(): Promise<NotionPost[]> {
 }
 
 export async function getPostDetails(postId: string) {
-  const response = await notion.blocks.children.list({
-    block_id: postId,
-  });
-  console.log(response); // 응답을 확인
+  if (postId === 'favicon.ico') {
+    return null; // 에러 없이 무시
+  }
 
-  return response.results.map((block: any) => {
+  // 전체 블록을 가져오는 함수
+  const fetchBlocks = async (blockId: string, startCursor: string | null = null) => {
+    const response = await notion.blocks.children.list({
+      block_id: blockId,
+      start_cursor: startCursor || undefined,
+    });
+
+    // 만약 next_cursor가 있으면, 계속해서 데이터를 불러옴
+    if (response.has_more) {
+      const nextResults = await fetchBlocks(blockId, response.next_cursor);
+      return [...response.results, ...nextResults];
+    }
+    return response.results;
+  };
+
+  // 전체 블록 가져오기
+  const blocks = await fetchBlocks(postId);
+
+  // 각 블록을 처리
+  return blocks.map((block: any) => {
     switch (block.type) {
       case 'paragraph':
         return block.paragraph.rich_text[0]?.plain_text || '';
@@ -40,7 +58,7 @@ export async function getPostDetails(postId: string) {
         return `• ${block.bulleted_list_item.rich_text[0]?.plain_text || ''}`;
       case 'numbered_list_item':
         return `1. ${block.numbered_list_item.rich_text[0]?.plain_text || ''}`;
-      // 필요에 따라 더 많은 블록 타입 처리 추가
+      // 추가적인 블록 타입 처리
       default:
         return '';
     }
