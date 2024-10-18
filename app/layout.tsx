@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import TopBar from './components/TopBar';
-
+import RightBar from './components/RightBar';
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -26,9 +26,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-      <TopBar />
-        {children}
+      <body className={`${geistSans.variable} ${geistMono.variable}`} style={{ display: 'grid', gridTemplateRows: 'auto 1fr', gridTemplateColumns: '3fr 1fr', height: '100vh' }}>
+      <div style={{ gridColumn: '1 / span 2' }}>
+        <TopBar />
+      </div>
+      {/* 메인 콘텐츠 영역 */}
+      <main style={{ padding: '20px' }}>{children}</main>
+      {/* RightBar는 오른쪽 고정 */}
+      <RightBar />
       </body>
     </html>
   );

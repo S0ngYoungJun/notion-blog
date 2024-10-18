@@ -1,0 +1,30 @@
+.topbar {
+  position: fixed; /* 상단에 고정 */
+  top: 0;
+  left: 0;
+  width: 15vw; 
+  height: 100vh; 
+  background-color: lightgray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.1); /* 약간의 그림자 */
+  z-index: 1000; /* 다른 콘텐츠보다 위에 표시 */
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.menu {
+  display: flex;
+  gap: 20px;
+}
+
+.menuItem {
+  cursor: pointer;
+  font-size: 18px;
+}
