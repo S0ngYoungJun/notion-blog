@@ -14,7 +14,7 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
   return (
     <div className={styles.postList}>
       {posts.map((post) => (
-        <Link href={`/${post.id}`} key={post.id} className={styles.link}>
+        <Link href={`/post/${post.id}`} key={post.id} className={styles.link}>
         <div key={post.id} className={styles.postItem}>
           <h2 className={styles.postTitle}>{post.title || 'No title'}</h2>
           <p className={styles.postContent}>{post.post || 'No content'}</p>

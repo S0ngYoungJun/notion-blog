@@ -4,8 +4,8 @@
   left: 0;
   width: 100%; /* 전체 너비를 차지 */
   height: 5vh; /* TopBar의 높이 */
-  background-color: #0070f3; /* 배경색 */
-  color: white; /* 글자색 */
+  background-color: #FFF5E4; /* 배경색 */
+  color: #FF9494; /* 글자색 */
   display: flex;
   align-items: center;
   justify-content: space-between;

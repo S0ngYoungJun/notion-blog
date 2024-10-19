@@ -3,7 +3,9 @@ import { NotionAPI } from 'notion-client';
 import { NotionPost } from '../types/notionTypes';
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
-const notionAPI = new NotionAPI(); 
+const notionAPI = new NotionAPI({
+  authToken: process.env.NOTION_TOKEN_V2, // 1. OAuth 인증
+}); 
 
 export async function getPosts(): Promise<NotionPost[]> {
   const response = await notion.databases.query({

@@ -2,19 +2,23 @@
   display:flex;
   flex-wrap: wrap;
   width:100vw;
-  margin-top:5vh;
+  height: auto; /* 내용에 따라 높이가 조정되도록 */
+  min-height: 100vh; /* 최소 높이 100vh 보장 */
+  padding-bottom: 20px; /* 하단에 여백 추가 */
   justify-content: space-around;
 }
 .link{
-  width:35vw;
-  height:12vh;
+  width:32vw;
+  height:11vh;
+  padding: 1vw;
+  margin-top:5vh;
   color: inherit; /* 부모 요소의 색상을 따름 */
   text-decoration: none; /* 밑줄 제거 */
 }
 .postItem {
   padding: 1vw;
-  width:35vw;
-  height:12vh;
+  width:32vw;
+  height:11vh;
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #f9f9f9;

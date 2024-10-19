@@ -1,17 +1,14 @@
-.topbar {
+.rightbar {
   position: fixed; /* 상단에 고정 */
-  top: 0;
-  left: 0;
+  left: 85vw;
   width: 15vw; 
   height: 100vh; 
-  background-color: lightgray;
+  background-color: #FFF5E4;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.1); /* 약간의 그림자 */
-  z-index: 1000; /* 다른 콘텐츠보다 위에 표시 */
+  justify-content: space-around;
+  z-index: 500; /* 다른 콘텐츠보다 위에 표시 */
 }
 
 .logo {

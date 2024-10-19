@@ -1,0 +1,10 @@
+.main{
+  display:flex;
+  width:85vw;
+  margin-top:5vh;
+  position: relative;
+  margin-top: 5vh; /* 상단바를 피해 시작 */
+  height: auto; /* 내용에 따라 높이가 조정되도록 */
+  min-height: 100vh; /* 최소 높이 100vh 보장 */
+  padding-bottom: 20px; /* 하단에 여백 추가 */
+}
