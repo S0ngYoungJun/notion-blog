@@ -15,7 +15,7 @@ export async function getPosts(): Promise<NotionPost[]> {
   return response.results.map((page: any) => ({
     id: page.id,
     title: page.properties?.title?.title?.[0]?.plain_text || 'No title',
-    post: page.properties?.post?.rich_text?.[0]?.plain_text || 'No content',
+    // post: page.properties?.post?.rich_text?.[0]?.plain_text || 'No content',
     created_time: page.created_time|| 'No date',
     tags: page.properties?.태그?.multi_select.map((tag: any) => ({
       id: tag.id,

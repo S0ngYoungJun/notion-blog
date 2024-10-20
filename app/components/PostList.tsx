@@ -17,7 +17,6 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
         <Link href={`/post/${post.id}`} key={post.id} className={styles.link}>
         <div key={post.id} className={styles.postItem}>
           <h2 className={styles.postTitle}>{post.title || 'No title'}</h2>
-          <p className={styles.postContent}>{post.post || 'No content'}</p>
           <span className={styles.postDate}>
             {new Date(post.created_time).toLocaleString()}
           </span>
