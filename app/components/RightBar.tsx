@@ -31,7 +31,6 @@ const RightBar: React.FC = () => {
   
   return (
     <div className={styles.rightbar}>
-      <div className={styles.search}>검색하기</div>
       <div className={styles.tagSection}>
         <h3>태그</h3>
         <ul className={styles.tagList}>
@@ -47,6 +46,7 @@ const RightBar: React.FC = () => {
           ))}
         </ul>
       </div>
+      <div className={styles.search}></div>
     </div>
   );
 };
