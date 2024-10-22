@@ -1,6 +1,7 @@
+"use client"
 import React from 'react';
 import styles from '../styles/RightBar.module.css';
-
+import { useTagStore } from '../store/useTagStore'; 
 interface Tag {
   id: string;
   name: string;
@@ -15,6 +16,7 @@ const tags: Tag[] = [
 ];
 
 const RightBar: React.FC = () => {
+  const { selectedTag, setSelectedTag } = useTagStore(); // Zustand 스토어에서 상태와 상태변경 함수 가져오기
   return (
     <div className={styles.rightbar}>
       <div className={styles.search}>검색하기</div>
@@ -24,8 +26,9 @@ const RightBar: React.FC = () => {
           {tags.map(tag => (
             <li
               key={tag.id}
-              className={styles.tag}
-              style={{ backgroundColor: tag.color }} // 태그별로 색상 적용
+              className={`${styles.tag} ${selectedTag === tag.name ? styles.activeTag : ''}`}
+              style={{ backgroundColor: tag.color }}
+              onClick={() => setSelectedTag(tag.name)} // 태그 클릭 시 선택된 태그를 Zustand에 설정
             >
               {tag.name}
             </li>

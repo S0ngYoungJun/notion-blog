@@ -15,7 +15,8 @@
     "notion-client": "^6.16.0",
     "react": "^18",
     "react-dom": "^18",
-    "react-notion-x": "^6.16.0"
+    "react-notion-x": "^6.16.0",
+    "zustand": "^5.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",
