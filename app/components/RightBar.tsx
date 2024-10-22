@@ -2,6 +2,8 @@
 import React from 'react';
 import styles from '../styles/RightBar.module.css';
 import { useTagStore } from '../store/useTagStore'; 
+
+
 interface Tag {
   id: string;
   name: string;
@@ -16,7 +18,17 @@ const tags: Tag[] = [
 ];
 
 const RightBar: React.FC = () => {
-  const { selectedTag, setSelectedTag } = useTagStore(); // Zustand 스토어에서 상태와 상태변경 함수 가져오기
+  const selectedTag = useTagStore(state => state.selectedTag);
+  const setSelectedTag = useTagStore(state => state.setSelectedTag);
+
+  const handleTagClick = (tagName: string) => {
+    if (selectedTag === tagName) {
+      setSelectedTag(null); // 동일한 태그를 클릭하면 필터 해제
+    } else {
+      setSelectedTag(tagName); // 선택한 태그로 필터 설정
+    }
+  };
+  
   return (
     <div className={styles.rightbar}>
       <div className={styles.search}>검색하기</div>
@@ -28,7 +40,7 @@ const RightBar: React.FC = () => {
               key={tag.id}
               className={`${styles.tag} ${selectedTag === tag.name ? styles.activeTag : ''}`}
               style={{ backgroundColor: tag.color }}
-              onClick={() => setSelectedTag(tag.name)} // 태그 클릭 시 선택된 태그를 Zustand에 설정
+              onClick={() => handleTagClick(tag.name)} // 태그 클릭 이벤트 핸들러
             >
               {tag.name}
             </li>
