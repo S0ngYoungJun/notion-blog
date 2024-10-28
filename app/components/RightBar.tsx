@@ -20,10 +20,12 @@ const tags: Tag[] = [
 const RightBar: React.FC = () => {
   const selectedTag = useTagStore(state => state.selectedTag);
   const setSelectedTag = useTagStore(state => state.setSelectedTag);
+  const searchTerm = useTagStore(state => state.searchTerm);
+  const setSearchTerm = useTagStore(state => state.setSearchTerm);
 
   const handleTagClick = (tagName: string) => {
     if (selectedTag === tagName) {
-      setSelectedTag(null); // 동일한 태그를 클릭하면 필터 해제
+      setSelectedTag(null); // 동일한 태그 클릭 시 필터 해제
     } else {
       setSelectedTag(tagName); // 선택한 태그로 필터 설정
     }
@@ -46,7 +48,15 @@ const RightBar: React.FC = () => {
           ))}
         </ul>
       </div>
-      <div className={styles.search}></div>
+      <div className={styles.search}>
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="검색어를 입력하세요"
+          className={styles.searchInput}
+        />
+      </div>
     </div>
   );
 };

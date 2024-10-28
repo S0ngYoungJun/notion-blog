@@ -10,14 +10,23 @@ interface PostListProps {
 }
 
 const PostList: React.FC<PostListProps> = ({ posts }) => {
-  const { selectedTag } = useTagStore(); // 선택된 태그 가져오기
+  const { selectedTag, searchTerm } = useTagStore(); // 선택된 태그와 검색어 가져오기
+
   if (posts.length === 0) {
     return <p>No posts available.</p>;
   }
 
-  const filteredPosts = selectedTag
-    ? posts.filter(post => post.tags.some(tag => tag.name === selectedTag))
-    : posts;
+  // 태그 및 검색어로 필터링된 포스트
+  const filteredPosts = posts.filter(post => {
+    const matchesTag = selectedTag
+      ? post.tags.some(tag => tag.name === selectedTag)
+      : true;
+    const matchesSearch = searchTerm
+      ? post.title?.toLowerCase().includes(searchTerm.toLowerCase()) 
+      : true;
+
+    return matchesTag && matchesSearch;
+  });
 
   if (filteredPosts.length === 0) {
     return <p>No posts available.</p>;
@@ -25,7 +34,7 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
 
   return (
     <div className={styles.postList}>
-      {filteredPosts.map((post) => (
+      {filteredPosts.map(post => (
         <Link href={`/post/${post.id}`} key={post.id} className={styles.link}>
           <div key={post.id} className={styles.postItem}>
             <h2 className={styles.postTitle}>{post.title || 'No title'}</h2>
@@ -36,7 +45,7 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
             {post.tags.length > 0 && (
               <div className={styles.tagList}>
                 <div className={styles.tagContainer}>
-                  {post.tags.map((tag) => (
+                  {post.tags.map(tag => (
                     <div key={tag.id} className={styles.tagItem}>{tag.name}</div>
                   ))}
                 </div>
